@@ -79,6 +79,26 @@ const getTotalSpending = () => {
 };
 
 /**
+ * 結果表示をするためのHTMLを作成する
+ * @param result
+ */
+const createinnerHTML = (result: Result): string => {
+  // シェアしろ
+  const text = `私のFANZA支出累計は${result.sum}円でした！ #fanza_total_spending`;
+  return `
+    <dl>
+      <dt>支出累計</dt>
+      <dd>${result.sum}</dd>
+    <dl>
+    <a
+      href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}"
+    >
+      支出累計をTweetする（シェアしろ）
+    </a>
+  `;
+};
+
+/**
  * 結果をHTMLに描画する
  * @param result
  */
@@ -98,12 +118,7 @@ const display = (result: Result) => {
   );
 
   // Resultの表示
-  element.innerHTML = `
-    <dl>
-      <dt>支出総額</dt>
-      <dd>${result.sum}</dd>
-    <dl>
-  `;
+  element.innerHTML = createinnerHTML(result);
 
   // styleを書き換える
   element.style.margin = '1rem auto';
