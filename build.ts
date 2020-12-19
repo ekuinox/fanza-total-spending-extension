@@ -11,7 +11,7 @@ const copyFile = TE.taskify<PathLike, PathLike, NodeJS.ErrnoException | null, vo
 
 const bundle = () => {
   const options: BuildOptions = {
-    entryPoints: [path.join(__dirname, './src/main.ts')],
+    entryPoints: ['main.ts', 'background.ts'].map(name => path.join(__dirname, `./src/${name}`)),
     outdir: path.join(__dirname, 'dist'),
   };
   return TE.tryCatch(
@@ -21,7 +21,7 @@ const bundle = () => {
 };
 
 const copyAssets = () => {
-  const targets = ['manifest.json'];
+  const targets = ['manifest.json', 'icon_32.png'];
   return pipe(
     targets,
     A.map(target => copyFile(path.resolve(__dirname, `./assets/${target}`), path.resolve(__dirname, `./dist/${target}`))),

@@ -4,12 +4,22 @@
   "short_name": "FanzaSpending",
   "version": "1",
   "permissions": [
-    "storage"
+    "tabs",
+		"background",
+		"http://*/*",
+		"https://*/*"
   ],
   "content_scripts": [
     {
       "matches": ["https://payment.dmm.co.jp/history/"],
       "js": ["main.js"]
     }
-  ]
+  ],
+  "browser_action": {
+		"default_icon": "icon_32.png",
+		"default_title": "Fanza総額"
+	},
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
