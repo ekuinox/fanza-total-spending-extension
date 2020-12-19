@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Fanza Total Spending Extension",
+  "short_name": "FanzaSpending",
+  "version": "1",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://payment.dmm.co.jp/history/"],
+      "js": ["main.js"]
+    }
+  ]
+}
