@@ -49,20 +49,22 @@ const parseHistory = (content: string) => {
   );
 };
 
+// とりあえず利用総額だけ取得して返す
 const getTotalSpending = async () => {
-  const r = await pipe(
+  return pipe(
     getMonthOptions(),
     A.map(getHistory),
     TE.sequenceArray,
     TE.map(A.map(parseHistory)),
     TE.map(sum),
   )();
-
-  console.log(r);
 };
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-    console.log([message, sender]);
-
-    getTotalSpending();
+  getTotalSpending().then(r => {
+    if (E.isLeft(r)) {
+      return;
+    }
+    console.log(`利用総額 => ${r.right}`);
+  });
 });
