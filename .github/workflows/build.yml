@@ -1,0 +1,21 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+  steps:
+    - uses: actions/checkout@v2
+    - name: setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+        registry-url: 'https://registry.npmjs.org'
+    - name: build
+      run: |
+        npm ci
+        npm run build
