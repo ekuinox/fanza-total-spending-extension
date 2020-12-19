@@ -13,10 +13,13 @@ const bundle = () => {
   const options: BuildOptions = {
     entryPoints: ['main.ts', 'background.ts'].map(name => path.join(__dirname, `./src/${name}`)),
     outdir: path.join(__dirname, 'dist'),
+    minify: true,
+    bundle: true,
+    target: 'chrome58',
   };
   return TE.tryCatch(
     () => build(options),
-    () => {},
+    err => err,
   );
 };
 
@@ -31,7 +34,7 @@ const copyAssets = () => {
 
 const checkTsc = () => {
   return () => new Promise<E.Either<ExecException | string, string>>(resolve => {
-    exec('npx tsc ./src/* --noEmit', (error, stdout, stderr) => {
+    exec('npx tsc --noEmit', (error, stdout, stderr) => {
       if (error != null) {
         return resolve(E.left(error));
       }
@@ -45,7 +48,20 @@ const checkTsc = () => {
 
 (async () => {
   // 面倒になった
-  await checkTsc()();
-  await bundle()();
-  await copyAssets()();
+  const r1 = await checkTsc()();
+  if (E.isLeft(r1)) {
+    console.error(r1);
+    return;
+  }
+  const r2 = await bundle()();
+  if (E.isLeft(r2)) {
+    console.error(r2);
+    return;
+  }
+  const r3 = await copyAssets()();
+  if (E.isLeft(r3)) {
+    console.error(r3);
+    return;
+  }
+  console.log('ok');
 })();
