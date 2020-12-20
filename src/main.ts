@@ -21,7 +21,7 @@ const getMonthOptions = () => {
     O.fromNullable(select?.children),
     O.map(options => Array.from(options) as Array<HTMLInputElement>),
     O.map(A.map(option => option.value)),
-    O.getOrElseW(() => [] as Array<string>),
+    O.getOrElse((): ReadonlyArray<string> => []),
   );
 };
 
