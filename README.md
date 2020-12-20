@@ -18,6 +18,11 @@
 
 ![result](./vivaldi_0of2i3TsFC.png)
 
+---
+
+chromeは右上の拡張昨日ボタンから一覧開いて、そこから起動する必要があるみたい。
+![chrome](./chrome_UXe1usfMC6.png)
+
 **シェアしてくれると嬉しい！！！！**
 
 ## 注意
