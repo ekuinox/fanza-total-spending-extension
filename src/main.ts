@@ -88,7 +88,7 @@ const createinnerHTML = (result: Result): string => {
   return `
     <dl>
       <dt>支出累計</dt>
-      <dd>${result.sum}</dd>
+      <dd>${result.sum}円</dd>
     <dl>
     <a
       href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}"
