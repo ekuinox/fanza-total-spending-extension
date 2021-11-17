@@ -9,6 +9,21 @@ import { pipe } from 'fp-ts/lib/function';
 
 const copyFile = TE.taskify<PathLike, PathLike, NodeJS.ErrnoException | null, void>(fs.copyFile);
 
+const buildBookmarklet = () => {
+  const options: BuildOptions = {
+    entryPoints: [path.join(__dirname, './src/bookmarklet.ts')],
+    outdir: path.join(__dirname, 'out'),
+    minify: true,
+    bundle: true,
+    target: 'chrome58',
+  };
+
+  return TE.tryCatch(
+    () => build(options),
+    err => err,
+  );
+};
+
 const bundle = () => {
   const options: BuildOptions = {
     entryPoints: ['main.ts', 'background.ts'].map(name => path.join(__dirname, `./src/${name}`)),
@@ -62,6 +77,10 @@ const checkTsc = () => {
   if (E.isLeft(r3)) {
     console.error(r3);
     return;
+  }
+  const r4 = await buildBookmarklet()();
+  if (E.isLeft(r4)) {
+    console.error(r4);
   }
   console.log('ok');
 })();
