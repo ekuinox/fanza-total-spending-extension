@@ -4,7 +4,15 @@
 
 [FANZA購入履歴](https://payment.dmm.co.jp/history/)からこれまでFANZAに費やしたお金の総額を調べることができます。
 
-## 導入 & 使い方
+## 導入 (ブックマークレットとして)
+
+1. [Releases](https://github.com/ekuinox/fanza-total-spending-extension/releases/)から最新のbookmarkletをダウンロードする。
+
+2. ダウンロードしたbookmarkletファイルをテキストエディタで開き、テキスト内容をすべてコピーする。
+
+3. ブラウザに新しいブックマークを作成し、URLとしてコピーしたテキスト内容をすべて貼り付ける。
+
+## 導入 (ブラウザの拡張機能として)
 
 1. [Releases](https://github.com/ekuinox/fanza-total-spending-extension/releases/)から最新のrelease.zipをダウンロードし展開する。
 
@@ -12,9 +20,13 @@
 
 3. 「パッケージ化されていない拡張機能を読み込む」から1で展開したフォルダを読み込む。
 
-4. [FANZA購入履歴](https://payment.dmm.co.jp/history/)にアクセスして、右上に追加された赤い字のボタンを押す。
+## 使い方
 
-5. 数秒後に結果が左下に表示される。
+1. [FANZA購入履歴](https://payment.dmm.co.jp/history/)にアクセスする。
+
+2. 追加したブックマークレット、または右上に追加された赤い字のボタンを押す。
+
+3. 数秒後に結果が左下に表示される。
 
 ![result](./vivaldi_0of2i3TsFC.png)
 
