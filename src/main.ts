@@ -34,6 +34,9 @@ const getHistory = (purchaseDate: string) => {
     TE.tryCatch(
       () => fetch('/history', {
         method: 'POST',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
         body: `purchaseDate=${purchaseDate}`
       }).then(r => r.text()),
       () => null,
@@ -60,7 +63,11 @@ const parseHistory = (content: string) => {
       if (m.length < 2) return O.none;
       return O.some(parseInt(m[1].replace(',', '')));
     }),
-    sum
+    sum,
+    (n) => {
+      console.log(n);
+      return n;
+    }
   );
 };
 
