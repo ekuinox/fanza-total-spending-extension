@@ -26,6 +26,9 @@ jobs:
         run: |
           cd dist
           zip release *.*
+      - name: create bookmarklet
+        run: |
+          ./build_bookmarklet.sh
       - name: release
         id: create_release
         uses: actions/create-release@v1.0.0
@@ -46,3 +49,13 @@ jobs:
           asset_path: ./dist/release.zip
           asset_name: ftse-release.zip
           asset_content_type: application/zip
+      - name: upload bookmarklet release
+        id: upload-bookmarklet-release-asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./out/bookmarklet
+          asset_name: bookmarklet
+          asset_content_type: text/plain
