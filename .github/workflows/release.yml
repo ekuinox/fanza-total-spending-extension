@@ -28,7 +28,7 @@ jobs:
           zip release *.*
       - name: create bookmarklet
         run: |
-          ./build_bookmarklet.sh
+          sh ./build_bookmarklet.sh
       - name: release
         id: create_release
         uses: actions/create-release@v1.0.0
